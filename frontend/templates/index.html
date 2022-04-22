@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="">
+
+{% load static %}
+
+<head>
+    <title>Wild Life Shield</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'styles/popup.css' %}"/>
+
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+{#    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">#}
+
+    {% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+         {% if message.level == 25 %}
+        <div class="alert alert-dismissible alert-success">
+        {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-dismissible alert-danger">
+        {{ message }}
+        </div>
+        {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+</head>
+<body>
+<div class="container py-5">
+    <div class="col-lg-8 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="d-inline-flex flex-column text-center pr-3 border-right">
+                        <h6>Opening Hours</h6>
+                        <p class="m-0">8.00AM - 9.00PM</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center px-3 border-right">
+                        <h6>Email Us</h6>
+                        <p class="m-0">kerenba15@gmail.com</p>
+                    </div>
+                    <div class="d-inline-flex flex-column text-center pl-3">
+                        <h6>Call Us</h6>
+                        <p class="m-0">054-5343391</p>
+                    </div>
+                </div>
+            </div>
+<br>
+    <form method="POST">
+<div class="container-fluid p-0">
+<div id="header-carousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+    <img class="w-100" src="../static/lionfamily.jpg" alt="Image">
+     <div class="carousel-caption d-flex flex-column align-items-left justify-content-left">
+         <div class="p-3" style="max-width: 900px;">
+             <h1 class="display-4 text-white mb-3">WildLifeShield.</h1>
+            <h3 class="text-white mb-3 d-none d-sm-block">Care to Scroll in Cruelty-Free Environment?</h3>
+             <h5 class="text-white mb-3 d-none d-sm-block">WildLifeShield is an app which allows you to <br>reduce your exposure to images of animals in captivity.  </h5>
+            </div>
+             <br><br><br><br><br><br><br><br>
+            <div class="d-flex flex-column align-items-center">
+                 <h4 class="text-white"> Please Enter URL here: </h4>
+                  <div class="form-group d-flex flex-column align-items-center">
+                 <input type="text" name="url" class="form-control border-0" placeholder="Replace Me With Your URL" required="required" />
+            <br><h4 class="text-white"> And we will tell you if's free of:  </h4>
+             <div class="form-group d-flex flex-column align-items-center">
+                <select name='classifier' class="custom-select border-0 px-4" style="height: 38px;">
+                    <option value="caged-animals">Caged Animals</option>
+                </select>
+            </div>
+             <div class="form-group d-flex flex-column align-items-center">
+             <button class="btn btn-primary btn-block border-0 py-3" type="submit">Check Now</button>
+</div>
+</div>
+        </div>
+    </div>
+        </div>
+        </div>
+    </div>
+    </div>
+        </form>
+</div>
+</body>
+</html>

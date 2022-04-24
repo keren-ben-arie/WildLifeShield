@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "cage-classifier",
+  "private_key_id": "d78ac113b1faf4a460b5268f73f031c5c15e5648",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDV8rjfTblMW+PI\nYVmQ+Q0da6yADamaK++XhitZYJRwX1H8HiyBbbaVo1yNc86QJccXXyDywqBqAuGH\n++yrmbbGYx02m0Se1KOltVQGsYj0Rbsrfs2GA7b4SVRpebKz+TjQ0A7tl384UhfN\n0OrI1wdIlQuLm9IhPCOrjpW0o3GMQ/Uv4QHA/19c/cZ95uhHp0jgmbaUgTbiE457\nvRHqk79EME7WF/5X5tIsdrHKiMb2zJlrmICSfPPNJL737brCJer5J8imFQs3DNqo\nf4tILs9V/uOOUdSfUqf2LM0Bp4piwlzXoXuU52x4ZKEebuNLrJ8MCO9pGbBNbpum\nNujhevp5AgMBAAECggEAEBGiIYFyrqHDLrBjHACco85LvzVnfOEaZmjJFjYrB/Kc\n04EHqjPtj/kcUTJ2u/xeYuq97IXCKxwqyL4a5TuPDwDwN4L7aSuC3AYNuM/6P5CC\nMY7dTFi4lBbb3G0rxxkrk4Fg8abcgwQlbguoKqv9y82H97UdF+puqmqz40SYWWa5\nFdMPdKomRu6UI4F041qmoO6u9rGDvPFAH3HL2zOuZ01QpahaEkWi6qIoBrCNA1Du\nGC1cCxB6SqHlJIv187w47wi5i20zC+xasYlZdsyQTWTQbBBlpcoJzMgm++V4DQoi\n4tDncz+ip/Qc1GF49Dx0cOMNOEsywCrZ+clY/nQR9QKBgQDx1w8yNJQqz4hxQitA\nT9TzY3f2RXXQ0feqJ7k5FExWhuykDEEJbhmLBoGKlmRB94kuJahPKHMBQilay1T0\n/iQfkyHDQuXeP4PPzTKZCpBPajr3Oc32gxoc06saw+ZY5Lz9PA32XUBJjJuY0oKU\nqkPhW1V0/WngbFo5yad2jG0wbQKBgQDieZcrWGDpHBLjxZptlch6q7PSuexxrRW9\nDSua5QwnF5eV/IJdlmHOGM8Cal7qL+GpByqFuW3Zx/CFKe0KLEaD6YT1D9Pc2qZN\n43oJrQiNoKH1QYdAC8bFDk3Ab+S+eXk2uzizBCI+/PXPaZC6dbNWmqmrQ9A2Dq+b\nn4LiidbivQKBgQCVRAnLEQzKh6FNVmvfm+Zx+tjWFfUr2Aym5zG5ez/KwCha8H1L\n1rrJRlC6OyzSUnhHFVMW2H5zLmTb91gOhrXBD0zteeLrFATFQ3+RWiXL/mM6qGDp\nX+3EERkwwezwvO2w11o+zzuYqcJ3xqZ2H8kZ1Qef17F7pSTjOgW0c+QI2QKBgQDd\n2exK6rVsRTL/6wd/B/YurNpnt/e1167u1eL8RhmkhcjZhVUTZogCw2yt2hOGZ0cw\nNDPkcSP57ZFgcRSiHYMqH2w+P7XzqEC3FfnrVpSFYHCm9v0NsTuSt5NUyoeSSx6B\njd9aBdeiSlxlRO0gqsH2OWWxvqlM+w/ta9FkJ1DYJQKBgB3OJ370V1QgKMaC8hVQ\nYqVKcfNjn9zoBb6rUbCeqEEHxMCj18zG1Uk9RKisBoTc+bSGnEosaHxLkkzqTNDZ\nlpHhUuuzO87lN9MDzJe6jd947rWEY8W/ONLNnm0nq/8NU2LOEgD8QvGRGbpTsgk1\nJRfNg1TwoeUzVmjp9wY1I8AM\n-----END PRIVATE KEY-----\n",
+  "client_email": "keren-ben-arie@cage-classifier.iam.gserviceaccount.com",
+  "client_id": "112527621513504155588",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/keren-ben-arie%40cage-classifier.iam.gserviceaccount.com"
+}

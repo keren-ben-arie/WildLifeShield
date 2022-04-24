@@ -2,6 +2,18 @@ from bs4 import *
 import requests
 import io
 import PIL.Image as Image
+# Imports the Google Cloud client library
+from google.cloud import vision
+
+client = vision.ImageAnnotatorClient()
+
+def is_animal(content):
+    image = vision.Image(content=content)
+    # Performs label detection on the image file
+    response = client.label_detection(image=image)
+    labels = [label.description.split() for label in response.label_annotations]
+    flat_labels = [item for sublist in labels for item in sublist]
+    return 'animal' in flat_labels
 
 
 # DOWNLOAD ALL IMAGES FROM THAT URL
@@ -10,7 +22,6 @@ def get_actual_images(images):
     count = 0
 
     # print total images found in URL
-    print(f"Total {len(images)} Image Found!")
     images_array = []
 
     if len(images) != 0:
@@ -28,33 +39,28 @@ def get_actual_images(images):
                             image_link = image["src"]
                         except:
                             pass
-
             # After getting Image Source URL
             # We will try to get the content of image
             try:
                 r = requests.get(image_link).content
                 try:
                     # possibility of decode
-                    r = str(r, 'utf-8')  # TODO convert to png
+                    r = str(r, 'utf-8')
 
                 except UnicodeDecodeError:
-                    # image = pyvips.Image.new_from_file(r, dpi=300)
-                    # image.write_to_file("img.png")
+                    if not is_animal(r):
+                        continue
                     img = Image.open(io.BytesIO(r))
-                    print(type(img))
+                    width, height = img.size
+                    if width < 100 or height < 100:
+                        continue
                     images_array.append(img)
-
-                    # counting number of image downloaded
                     count += 1
+                    print(i, image_link)
             except:
                 pass
 
-        # There might be possible, that all
-        # images not download
-        # if all images download
-        if count == len(images):
-            print("All Images Downloaded!")
-
+    print(f"Total {len(images_array)} Image Found!")
     return images_array
 
 
@@ -72,4 +78,3 @@ def get_images_from_url(url):
     net_input = get_actual_images(images)
 
     return net_input
-

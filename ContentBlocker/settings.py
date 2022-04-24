@@ -14,6 +14,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.join(BASE_DIR, "frontend")
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:\\Users\\User\\PycharmProjects" \
+                                               "\\CageClassifier\\cage-classifier-d78ac113b1fa.json"
 
 
 # Quick-start development settings - unsuitable for production

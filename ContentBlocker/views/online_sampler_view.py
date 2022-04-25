@@ -1,19 +1,13 @@
-import pickle
-
-import numpy as np
 import torch
-from PIL import Image
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages import INFO
 from django.views.generic import TemplateView
 from requests.exceptions import MissingSchema
 from torchvision import transforms
 import torch.nn.functional as F
-
 from ContentBlocker.logic.url_images_fetcher import get_images_from_url
 from django.shortcuts import redirect
 from django.contrib import messages
-
 from ModelCreation.CNN import CNN
 
 

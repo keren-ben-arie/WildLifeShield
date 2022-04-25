@@ -6,6 +6,8 @@ import PIL.Image as Image
 from google.cloud import vision
 
 client = vision.ImageAnnotatorClient()
+KEYWORDS = {'animal', 'Animal', 'Mammal', 'cat', 'Cats', 'Cat', 'Pet', 'pet'}
+
 
 def is_animal(content):
     image = vision.Image(content=content)
@@ -14,17 +16,15 @@ def is_animal(content):
     labels = [label.description.split() for label in response.label_annotations]
     flat_labels = [item for sublist in labels for item in sublist]
     print(flat_labels)
-    return 'animal' in flat_labels or 'Animal' in flat_labels or 'Mammal' in flat_labels
+    return KEYWORDS & set(flat_labels)
 
 
 # DOWNLOAD ALL IMAGES FROM THAT URL
 def get_actual_images(images):
     # initial count is zero
     count = 0
-
     # print total images found in URL
     images_array = []
-
     if len(images) != 0:
         for i, image in enumerate(images):
             try:

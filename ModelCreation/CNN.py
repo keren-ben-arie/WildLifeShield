@@ -1,6 +1,3 @@
-# for evaluating the model
-import pickle
-
 from matplotlib import pyplot as plt
 from numpy.random.mtrand import shuffle
 from sklearn.metrics import f1_score, precision_score, recall_score, roc_curve, roc_auc_score
@@ -12,15 +9,12 @@ from torch.nn import Linear, ReLU, CrossEntropyLoss, Sequential, Conv2d, MaxPool
 from torch.optim import Adam
 import torch.nn as nn
 from ModelCreation import data_loader
-import numpy as np
 
-# CURRENTLY 2016 IMAGES
-# learning_rate = 0.00001
-# batch_size = int(2016 / 8)
 shuffle = True
 num_workers = 1
 data_size = 13536
 data_size_mock = 12
+
 
 class CNN(nn.Module):
     train_loader = None
@@ -47,7 +41,6 @@ class CNN(nn.Module):
         )
 
         self.linear_layers = Sequential(
-            # Linear(4 * 7 * 7 * 100, 10)
             Linear(12544, 10)
 
         )
@@ -59,38 +52,8 @@ class CNN(nn.Module):
         x = self.linear_layers(x)
         return x
 
-#
-# def get_train_accuracy(model):
-#     g = torch.Generator()
-#     g.manual_seed(42)
-#     train_loader = DataLoader(dataset=model.train_set, shuffle=shuffle, batch_size=2267,generator=g)
-#     for i, data in enumerate(train_loader, 0):
-#         accuracy = single_predict(data, model)
-#         return accuracy
-#
-#
-# def get_validation_accuracy(model):
-#     g = torch.Generator()
-#     g.manual_seed(42)
-#     validation_loader = DataLoader(dataset=model.validation_set, shuffle=shuffle, batch_size=2267,generator=g)
-#     for i, data in enumerate(validation_loader, 0):
-#         print("VAL ONLY ONCE.")
-#         accuracy = single_predict(data, model)
-#         return accuracy
-#
-#
-# def get_test_accuracy(model):
-#     g = torch.Generator()
-#     g.manual_seed(42)
-#     test_loader = DataLoader(dataset=model.test_set, shuffle=False, batch_size=2267,generator=g)
-#     df = model.test_loader.dataset.dataset.data
-#     lst = model.test_loader.dataset.indices
-#     for i, data in enumerate(test_loader, 0):
-#         accuracy, conf, predictions = single_predict(data, model)
-#         return accuracy
 
-
-def score(data, model):
+def score(model):
     g = torch.Generator()
     g.manual_seed(42)
     train_loader = DataLoader(dataset=model.train_set, shuffle=False, batch_size=data_size, generator=g)
@@ -120,6 +83,7 @@ def score(data, model):
         plt.legend(loc='best')
         plt.show()
 
+
 def define_parameters(batch_size):
     # defining the model
     model = CNN()
@@ -131,10 +95,10 @@ def define_parameters(batch_size):
     if torch.cuda.is_available():
         model = model.cuda()
         criterion = criterion.cuda()
-    # validation_set
     g = torch.Generator()
     g.manual_seed(42)
-    model.train_loader = DataLoader(dataset=model.train_set, shuffle=shuffle, batch_size=batch_size,generator=g)
+    model.train_loader = DataLoader(dataset=model.train_set, shuffle=shuffle, batch_size=batch_size, generator=g)
+    ''' Can add validation and tests set (I used it to test the model.) '''
     # model.validation_loader = DataLoader(dataset=model.validation_set, shuffle=shuffle, batch_size=batch_size,generator=g)
     # model.test_loader = DataLoader(dataset=model.test_set, shuffle=shuffle, batch_size=batch_size,generator=g)
     return model
@@ -148,7 +112,6 @@ def train(model):
         criterion = criterion.cuda()
     optimizer = Adam(model.parameters(), lr=0.007)
     for epoch in range(1):  # loop over the dataset multiple times
-        running_loss = 0.0
         for i, data in enumerate(model.train_loader, 0):
             # get the inputs
             inputs, labels = data.values()
@@ -159,11 +122,9 @@ def train(model):
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-            # print statistic
-
 
     print('Finished Training')
     # save the model to disk
     torch.save(model.state_dict(), "C:\\Users\\User\\PycharmProjects\\CageClassifier\\ModelCreation\\trained_model1.pt")
-    score(model.train_set, model)
+    score(model)
     return model

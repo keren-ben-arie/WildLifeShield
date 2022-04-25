@@ -68,10 +68,9 @@ class OnlineSamplerView(PermissionRequiredMixin, TemplateView):
             print(i , " ",predicted," ", conf)
 
         if cages_counter > 0:
-            messages.error(self.request, f"There are {len(images)} on this webpage, out of them: {cages_counter} are unsafe for you.")
+            messages.error(self.request, f"There are {cages_counter} images on this webpage which are unsafe for you.")
         else:
-            messages.success(self.request, f"This webpage is safe. There are {len(images)} which are completely safe.")
-        # certainty = ready_cnn.score(X_test, Y_test)
+            messages.success(self.request, f"This webpage is safe.")
         return redirect(self.request.path)
 
     def _get_message(self):

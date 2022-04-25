@@ -13,7 +13,8 @@ def is_animal(content):
     response = client.label_detection(image=image)
     labels = [label.description.split() for label in response.label_annotations]
     flat_labels = [item for sublist in labels for item in sublist]
-    return 'animal' in flat_labels
+    print(flat_labels)
+    return 'animal' in flat_labels or 'Animal' in flat_labels or 'Mammal' in flat_labels
 
 
 # DOWNLOAD ALL IMAGES FROM THAT URL

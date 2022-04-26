@@ -59,7 +59,7 @@ class OnlineSamplerView(PermissionRequiredMixin, TemplateView):
                 if conf < 0.7:
                     predicted[0] = 0
             cages_counter += predicted[0]
-            print(i , " ",predicted," ", conf)
+            print(f"Image number {i}, Classification is: {predicted[0]} \n Confidence level is {conf}")
 
         if cages_counter > 0:
             messages.error(self.request, f"There are {cages_counter} images on this webpage which are unsafe for you.")

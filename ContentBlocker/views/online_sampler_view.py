@@ -19,6 +19,7 @@ class OnlineSamplerView(PermissionRequiredMixin, TemplateView):
                                          "\\trained_model.pt"))
     ready_cnn.eval()
     models = {"caged-animals": ready_cnn}
+    transform_image = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
 
     @classmethod
     def as_view(cls, **initkwargs):
@@ -36,7 +37,6 @@ class OnlineSamplerView(PermissionRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         classifier = request.POST.get('classifier')
-        print(classifier)
         try:
             url = request.POST.get('url')
             images = get_images_from_url(url)
@@ -44,20 +44,13 @@ class OnlineSamplerView(PermissionRequiredMixin, TemplateView):
             messages.error(self.request, f"The URL is invalid.")
             return redirect(self.request.path)
         cages_counter = 0
-        ready_images = []
         for i, img in enumerate(images):
-            self.models[classifier].eval()
             img = img.convert('RGB')
-            transform_image = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor()])
-            ready_image = transform_image(img).float()
+            ready_image = self.transform_image(img).float()
             ready_image = ready_image.unsqueeze(0)
-            ready_images.append(ready_image)
             y = self.models[classifier](ready_image)
             probs = torch.nn.functional.softmax(y, dim=1)
             conf, predicted = torch.max(probs, 1)
-            if predicted[0] == 1:
-                if conf < 0.7:
-                    predicted[0] = 0
             cages_counter += predicted[0]
             print(f"Image number {i}, Classification is: {predicted[0]} \n Confidence level is {conf}")
 

@@ -6,17 +6,22 @@ import PIL.Image as Image
 from google.cloud import vision
 
 client = vision.ImageAnnotatorClient()
-KEYWORDS = {'animal', 'Animal', 'Mammal', 'cat', 'Cats', 'Cat', 'Pet', 'pet'}
+KEYWORDS = {'animal', 'Animal', 'Mammal', 'cat', 'Cats', 'Cat', 'Pet', 'pet', 'Tiger', 'tiger'}
 
 
-def is_animal(content):
+def get_labels(response) -> set:
+    labels = [label.description.split() for label in response.label_annotations]
+    return {item for sublist in labels for item in sublist}
+
+
+# This function uses Google API for Vision
+def is_animal(content) -> set[str]:
     image = vision.Image(content=content)
     # Performs label detection on the image file
     response = client.label_detection(image=image)
-    labels = [label.description.split() for label in response.label_annotations]
-    flat_labels = [item for sublist in labels for item in sublist]
-    print(flat_labels)
-    return KEYWORDS & set(flat_labels)
+    labels = get_labels(response)
+    print(f"Labels for this images are {labels}")
+    return KEYWORDS & labels
 
 
 # DOWNLOAD ALL IMAGES FROM THAT URL
@@ -61,21 +66,17 @@ def get_actual_images(images):
             except:
                 pass
 
-    print(f"Total {len(images_array)} Image Found!")
+    print(f"Total {len(images_array)} Animal Images Found!")
     return images_array
 
 
 # MAIN FUNCTION START
 def get_images_from_url(url):
     # content of URL
-    r = requests.get(url)
-
+    response = requests.get(url)
     # Parse HTML Code
-    soup = BeautifulSoup(r.text, 'html.parser')
-
+    soup = BeautifulSoup(response.text, 'html.parser')
     # find all images in URL
     images = soup.findAll('img')
-
     net_input = get_actual_images(images)
-
     return net_input

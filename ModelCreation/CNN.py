@@ -20,9 +20,7 @@ class CNN(nn.Module):
     train_loader = None
     validation_loader = None
     test_loader = None
-    dataset = data_loader.AnimalsDataset()
-    # train_set, validation_set, test_set = torch.utils.data.random_split(dataset, [9001, 2267, 2267])
-    train_set = torch.utils.data.random_split(dataset, [data_size])[0]
+
 
     def __init__(self):
         super(CNN, self).__init__()
@@ -97,6 +95,9 @@ def define_parameters(batch_size):
         criterion = criterion.cuda()
     g = torch.Generator()
     g.manual_seed(42)
+    dataset = data_loader.AnimalsDataset()
+    # train_set, validation_set, test_set = torch.utils.data.random_split(dataset, [9001, 2267, 2267])
+    train_set = torch.utils.data.random_split(dataset, [data_size])[0]
     model.train_loader = DataLoader(dataset=model.train_set, shuffle=shuffle, batch_size=batch_size, generator=g)
     ''' Can add validation and tests set (I used it to test the model.) '''
     # model.validation_loader = DataLoader(dataset=model.validation_set, shuffle=shuffle, batch_size=batch_size,generator=g)
